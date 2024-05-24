@@ -106,14 +106,14 @@ function App() {
   return (
     <SaasProvider theme={theme}>
       <AppShell>
-        <PanelsProvider>
+        {/* <PanelsProvider>
           <Panel name="Inbox">
             <ToggleButton name="Detail" />
           </Panel>
           <Panel name="Detail">
             <ToggleButton name="Inbox" />
           </Panel>
-        </PanelsProvider>
+        </PanelsProvider> */}
         <Box display="flex" h="full">
           <Page flexBasis="50%" flexGrow="1">
             <PageHeader title="Email" />
@@ -178,7 +178,27 @@ function App() {
               })}
             </StructuredList>
           </Page>
-          {ctx.state["Detail"] && (
+          <Panel name="Detail" mobileSheet={true} flexBasis="50%">
+            <Page>
+              <PageHeader
+                title="Content"
+                toolbar={
+                  <Box w="full" display="flex" justifyContent="flex-end">
+                    <CloseButton onClick={() => ctx.closePanel("Detail")} />
+                  </Box>
+                }
+              />
+              <Box bg="lightgray" p={5}>
+                <Card>
+                  <CardHeader textAlign={"start"} fontWeight={"bold"}>
+                    {activeEmail.subject} - {activeEmail.from}
+                  </CardHeader>
+                  <CardBody textAlign={"start"}>{activeEmail.content}</CardBody>
+                </Card>
+              </Box>
+            </Page>
+          </Panel>
+          {/* {ctx.state["Detail"] && (
             <Page flexBasis="50%">
               <PageHeader
                 title="Content"
@@ -197,7 +217,7 @@ function App() {
                 </Card>
               </PageBody>
             </Page>
-          )}
+          )} */}
         </Box>
       </AppShell>
     </SaasProvider>

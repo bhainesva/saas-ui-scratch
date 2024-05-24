@@ -28,9 +28,11 @@ export const usePanels = <Name extends string>(props: UsePanelsProps<Name>) => {
       Panel: <PartStyles extends Name[][number]>({
         name,
         children,
+        mobileSheet,
       }: {
         name: PartStyles;
         children: React.ReactNode;
+        mobileSheet?: boolean;
       }) => React.ReactNode;
       ToggleButton: <PartStyles extends Name[][number]>({
         name,
@@ -67,12 +69,23 @@ export const usePanels = <Name extends string>(props: UsePanelsProps<Name>) => {
           </PanelsContext.Provider>
         ),
         Panel: (props) => {
-          const isOpen = toReturn.isOpen(props.name);
+          const { name, mobileSheet, ...rest } = props;
+          const isOpen = toReturn.isOpen(name);
+          const position = mobileSheet
+            ? ["fixed", "fixed", "static"]
+            : "static";
+          const visibility = isOpen ? {} : { display: "none" };
           return (
-            <Box bg={isOpen ? "green" : "red"}>
-              <Box>
-                Name - {props.name} - {isOpen.toString()}
-              </Box>
+            <Box
+              {...visibility}
+              bg="white"
+              position={position}
+              left={0}
+              right={0}
+              top={0}
+              bottom={0}
+              {...rest}
+            >
               {props.children}
             </Box>
           );
