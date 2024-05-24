@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useState } from "react";
 import { LoremIpsum } from "lorem-ipsum";
 import {
   Button,
@@ -17,7 +17,6 @@ import {
 } from "@chakra-ui/react";
 import {
   AppShell,
-  StructuredListHeader,
   EmptyState,
   StructuredList,
   StructuredListItem,
@@ -100,11 +99,21 @@ function App() {
     names: ["Inbox", "Detail"],
     initialState: { Inbox: true, Detail: false },
   });
+
+  const { PanelsProvider, Panel, ToggleButton } = ctx;
   const [activeEmail, setActiveEmail] = useState<Email>(emails[0]);
 
   return (
     <SaasProvider theme={theme}>
       <AppShell>
+        <PanelsProvider>
+          <Panel name="Inbox">
+            <ToggleButton name="Detail" />
+          </Panel>
+          <Panel name="Detail">
+            <ToggleButton name="Inbox" />
+          </Panel>
+        </PanelsProvider>
         <Box display="flex" h="full">
           <Page flexBasis="50%" flexGrow="1">
             <PageHeader title="Email" />
