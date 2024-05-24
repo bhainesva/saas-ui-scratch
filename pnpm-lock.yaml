@@ -14,12 +14,18 @@ dependencies:
   '@saas-ui/react':
     specifier: ^2.8.4
     version: 2.8.4(@chakra-ui/react@2.8.2)(@emotion/react@11.11.4)(@emotion/styled@11.11.5)(framer-motion@11.2.6)(react-dom@18.3.1)(react@18.3.1)
+  lorem-ipsum:
+    specifier: ^2.0.8
+    version: 2.0.8
   react:
     specifier: ^18.2.0
     version: 18.3.1
   react-dom:
     specifier: ^18.2.0
     version: 18.3.1(react@18.3.1)
+  react-icons:
+    specifier: ^5.2.1
+    version: 5.2.1(react@18.3.1)
 
 devDependencies:
   '@types/react':
@@ -2748,6 +2754,11 @@ packages:
     resolution: {integrity: sha512-zW190nQTIoXcGCaU08DvVNFTmQhUpnJfVuAKfWqUQkflXKpaDdpaYoM0iluLS9lgJNHyBF58KKA2FBEwkD7wog==}
     dev: false
 
+  /commander@9.5.0:
+    resolution: {integrity: sha512-KRs7WVDKg86PWiuAqhDrAQnTXZKraVcCc6vFdL14qrZ/DcWwuRo7VoiYXalXO7S5GKpqYiVEwCbgFDfxNHKJBQ==}
+    engines: {node: ^12.20.0 || >=14}
+    dev: false
+
   /compute-scroll-into-view@3.0.3:
     resolution: {integrity: sha512-nadqwNxghAGTamwIqQSG433W6OADZx2vCo3UXHNrzTRHK/htu+7+L0zhjEoaeaQVNAi3YgqWDv8+tzf0hRfR+A==}
     dev: false
@@ -3355,6 +3366,14 @@ packages:
       js-tokens: 4.0.0
     dev: false
 
+  /lorem-ipsum@2.0.8:
+    resolution: {integrity: sha512-5RIwHuCb979RASgCJH0VKERn9cQo/+NcAi2BMe9ddj+gp7hujl6BI+qdOG4nVsLDpwWEJwTVYXNKP6BGgbcoGA==}
+    engines: {node: '>= 8.x', npm: '>= 5.x'}
+    hasBin: true
+    dependencies:
+      commander: 9.5.0
+    dev: false
+
   /lru-cache@5.1.1:
     resolution: {integrity: sha512-KpNARQA3Iwv+jTA0utUVVbrh+Jlrr1Fv0e56GGzAFOXN7dk/FviaDW8LHmK52DlcH4WP2n6gI8vN1aesBFgo9w==}
     dependencies:
@@ -3574,6 +3593,14 @@ packages:
     engines: {node: '>=12.22.0'}
     peerDependencies:
       react: ^16.8.0 || ^17 || ^18
+    dependencies:
+      react: 18.3.1
+    dev: false
+
+  /react-icons@5.2.1(react@18.3.1):
+    resolution: {integrity: sha512-zdbW5GstTzXaVKvGSyTaBalt7HSfuK5ovrzlpyiWHAFXndXTdd/1hdDHI4xBM1Mn7YriT6aqESucFl9kEXzrdw==}
+    peerDependencies:
+      react: '*'
     dependencies:
       react: 18.3.1
     dev: false
