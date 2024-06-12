@@ -1,12 +1,102 @@
+import React, { useRef } from "react";
 import { SaasProvider } from "@saas-ui/react";
-import { theme } from "@saas-ui-pro/react";
+import { getDataGridFilter, theme, DataGrid } from "@saas-ui-pro/react";
 import "./App.css";
+import {
+  FiltersProvider,
+  FiltersAddButton,
+  ActiveFiltersList,
+  ActiveFilterValueInput,
+} from "@saas-ui-pro/react";
 
 function App() {
   return (
     <SaasProvider theme={theme}>
-      <div>hi</div>
+      <ListPage />
     </SaasProvider>
+  );
+}
+
+function ListPage() {
+  const filters = React.useMemo(
+    () => [
+      {
+        id: "likes",
+        label: "Likes",
+        type: "number",
+        defaultOperator: "moreThan",
+        operators: ["is", "isNot", "moreThan", "lessThan"],
+      },
+    ],
+    []
+  );
+
+  const renderValue = React.useCallback((context) => {
+    if (context.id === "likes") {
+      return (
+        <ActiveFilterValueInput
+          type="number"
+          bg="none"
+          onChange={(e) => {
+            console.log(e.target.value, typeof e.target.value);
+          }}
+        />
+      );
+    }
+    return context.value?.toLocaleString();
+  }, []);
+
+  const gridRef = useRef(null);
+
+  const columns = React.useMemo(() => {
+    return [
+      {
+        accessorKey: "likes",
+        header: "Likes",
+        meta: {
+          isNumeric: true,
+        },
+        filterFn: getDataGridFilter("number"),
+      },
+    ];
+  }, []);
+
+  const onFilter = React.useCallback((filters) => {
+    gridRef.current.setColumnFilters(
+      filters.map((filter) => {
+        return {
+          id: filter.id,
+          value: {
+            value: filter.value,
+            operator: filter.operator || "is",
+          },
+        };
+      })
+    );
+  }, []);
+
+  const data = React.useMemo(
+    () => [
+      { likes: 1 },
+      { likes: 2 },
+      { likes: 3 },
+      { likes: 4 },
+      { likes: 5 },
+      { likes: 6 },
+      { likes: 7 },
+      { likes: 8 },
+      { likes: 9 },
+      { likes: 10 },
+    ],
+    []
+  );
+
+  return (
+    <FiltersProvider filters={filters} onChange={onFilter}>
+      <FiltersAddButton />
+      <ActiveFiltersList renderValue={renderValue} />
+      <DataGrid instanceRef={gridRef} columns={columns} data={data} />
+    </FiltersProvider>
   );
 }
 
