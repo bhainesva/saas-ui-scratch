@@ -26,25 +26,11 @@ function ListPage() {
         type: "number",
         defaultOperator: "moreThan",
         operators: ["is", "isNot", "moreThan", "lessThan"],
+        value: 3,
       },
     ],
     []
   );
-
-  const renderValue = React.useCallback((context) => {
-    if (context.id === "likes") {
-      return (
-        <ActiveFilterValueInput
-          type="number"
-          bg="none"
-          onChange={(e) => {
-            console.log(e.target.value, typeof e.target.value);
-          }}
-        />
-      );
-    }
-    return context.value?.toLocaleString();
-  }, []);
 
   const gridRef = useRef(null);
 
@@ -94,7 +80,7 @@ function ListPage() {
   return (
     <FiltersProvider filters={filters} onChange={onFilter}>
       <FiltersAddButton />
-      <ActiveFiltersList renderValue={renderValue} />
+      <ActiveFiltersList />
       <DataGrid instanceRef={gridRef} columns={columns} data={data} />
     </FiltersProvider>
   );
