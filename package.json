@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@chakra-ui/react": "^2.8.2",
-    "@saas-ui-pro/react": "^0.34.0",
+    "@saas-ui-pro/react": "0.35.4",
     "@saas-ui/react": "^2.8.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
